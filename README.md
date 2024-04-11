@@ -10,7 +10,7 @@ THIS SCRIPT IS FOR SSH MENU WITH:
 # Installation
 Let's install the Auto Script Menu;
 ```
-rm -rf install; apt update && apt upgrade -y;wget https://raw.githubusercontent.com/Klaus-illu/MFRKI/main/install; chmod +x install; ./install --start
+rm -rf install; apt update && apt install -y wget; wget https://raw.githubusercontent.com/Klaus-illu/MFRKI/main/install; chmod +x install; ./install --start
 ```
 ## Credits
 1. https://github.com/Klaus-illu @Klaus-illu
