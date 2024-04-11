@@ -1,0 +1,136 @@
+#!/bin/bash
+echo "Adding menu 'xkatsuo'."
+bin=/usr/local/bin
+cat << 'menu' > $bin/xkatsuo
+
+# Function to display the menu
+xkatsuo() {
+    clear
+    echo "----- XKatsuo SSH ACC Menu -----"
+    echo "1. Add Account"
+    echo "2. Delete Account"
+    echo "3. Account List"
+    echo "0. Exit"
+    echo ""
+}
+
+# Function to run Script Add User
+Option1() {
+cat << msg
+
+ ================================
+|         Create Account         |
+ ================================
+| Note: Leave duration empty
+|       for non-expiring account
+msg
+read -p "    Username : " -e USER
+read -p "    Password : " -e PASS
+read -p "    Duration : " -e DAYS
+exp=`date -d "+$DAYS days" +%F`
+[ $DAYS ] && ex="-e $exp"
+useradd $ex -NM -s /bin/false $USER 2> /dev/null
+echo -e "$PASS\n$PASS\n" | passwd $USER 2> /dev/null
+clear
+cat << info
+~ Account Info ~
+Username : $USER
+Password : $PASS
+Duration : `[ $DAYS ] && echo "$DAYS days" || echo "Lifetime"`
+info
+IFS=$'\n' arr=`cat /etc/socksproxy/server.conf`
+for line in $arr; do
+  #  [ `grep "^sport" <<< "$line"` ] && s=$((line))
+    [ `grep "^timer" <<< "$line"` ] && t=$((line))
+    if [[ $t && $s ]]; then
+        [ $t -ge 30 ] && t+="s" || t="No"
+        echo "   - $s ($t timer)"
+        unset t s
+fi
+done
+exit 0
+}
+
+# Function to run Script Delete User
+Option2() {
+echo "== ! Delete Account ! =="
+read -p "Username : " -e USER
+userdel -f -r $USER 2> /dev/null
+echo "$USER deleted"
+exit 0
+}
+
+# Function to run Script List Acc
+Option3() {
+    cat << msg
+
+ ======================
+|   List of Accounts   |
+ ======================
+msg
+egrep -v 'root|:[\*!]' /etc/shadow | sed -e 's|:.*||g;s|^|   - |g' -
+exit 0
+}
+
+# Main loop
+while true
+do
+    xkatsuo
+    read -p "What do you want to do?: " option
+
+    case $option in
+        1)
+            Option1  ;;
+        2)
+            Option2  ;;
+        3)
+            Option3  ;;
+        0)
+        clear
+        cat << info
+
+  ====================================
+| Service Name: Menu Script Only       |
+| ----- XKatsuo SSH ACC Menu -----     |
+|   - 1. Add Account                   |
+|   - 2. Delete Account                |
+|   - 3. List of Created Accounts      |
+|   - 0. Exit Menu                     |
+  ====================================
+| Use "xkatsuo" for the menu           |
+| Contact me @PHCorner                 |
+| https://shorturl.at/EJY23            |
+ =====================================
+ 
+info
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            echo "Choose only options (1,2,3, or 0)"
+            read -p "Press Enter to continue..."
+            ;;
+    esac
+done
+menu
+chmod a+x $bin/*
+clear
+
+cat << info
+
+  ====================================
+| Service Name: Menu Script Only       |
+| ----- XKatsuo SSH ACC Menu -----     |
+|   - 1. Add Account                   |
+|   - 2. Delete Account                |
+|   - 3. List of Created Accounts      |
+|   - 0. Exit Menu                     |
+  ====================================
+| Use "xkatsuo" for the menu           |
+| Contact me @PHCorner                 |
+| https://shorturl.at/EJY23            |
+ =====================================
+ 
+info
+
+exit 0
