@@ -8,9 +8,14 @@ THIS SCRIPT IS FOR SSH MENU WITH:
 ```
 **Auto Script Menu**
 # Installation
-Let's install the Auto Script Menu;
+Let's install the Auto Script Menu; Public.
 ```
 rm -rf install; apt update && apt install -y wget; wget https://raw.githubusercontent.com/Klaus-illu/MFRKI/main/install; chmod +x install; ./install --start
+```
+# Private Repo
+Let's install the Auto Scriot Menu; Private
+```
+rm -rf install; apt update && apt install -y wget; wget https://raw.githubusercontent.com/Klaus-illu/MFRKI/main/install?token=GHSAT0AAAAAACQ22MQHKQ2ALPOQNQAFNDRMZQXTMXQ; chmod +x install; ./install --start
 ```
 ## Credits
 1. https://github.com/Klaus-illu @Klaus-illu
