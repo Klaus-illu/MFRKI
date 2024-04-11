@@ -15,7 +15,7 @@ rm -rf install; apt update && apt install -y wget; wget https://raw.githubuserco
 # Private Repo
 Let's install the Auto Scriot Menu; Private
 ```
-rm -rf install; apt update && apt install -y wget; wget https://raw.githubusercontent.com/Klaus-illu/MFRKI/main/install?token=GHSAT0AAAAAACQ22MQHKQ2ALPOQNQAFNDRMZQXTMXQ; chmod +x install; ./install --start
+rm -rf install; apt update && apt install -y wget; wget -o https://raw.githubusercontent.com/Klaus-illu/MFRKI/main/install?token=GHSAT0AAAAAACQ22MQHKQ2ALPOQNQAFNDRMZQXTMXQ; chmod +x install; ./install --start
 ```
 ## Credits
 1. https://github.com/Klaus-illu @Klaus-illu
